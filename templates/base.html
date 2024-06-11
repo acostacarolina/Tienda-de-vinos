@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/icono.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+   
+</head>
+<body class="back">
+    <header>
+        <h1 id="cabecera">{% block cabecera %}{% endblock %}</h1>
+    </header>
+
+    <nav id="menu">
+        <ul>
+            <li><a href="{% url 'inicio' %}">Inicio</a></li>
+            <li><a href="{% url 'contacto' %}">Contacto</a></li>
+            <li><a href="{% url 'nosotros' %}">Quienes somos</a></li>
+
+            {% if request.user.is_anonymous %}
+                <li><a href="{% url 'registrarse' %}">Registrarme</a></li>
+                <li><a href="{% url 'ingresar' %}">Iniciar sesión</a></li>
+            {% else %}   
+            <li><a href="{% url 'salir' %}">Cerrar sesión</a></li>
+            {% endif %}
+        </ul>
+        <div class="form">
+            <form method="GET" id="busqueda" action="/busqueda/">
+                <input type="text" name="buscar">
+                <input type="submit" value="Búsqueda">
+            </form>
+        </div>
+    </nav>
+
+    <section>
+        {% block contenido %}{% endblock %}
+    </section>
+
+    <footer>
+        <p>Página con fines educativos 2024 &copy;</p>
+    </footer>
+    
+       
+    
+</body>
+</html>

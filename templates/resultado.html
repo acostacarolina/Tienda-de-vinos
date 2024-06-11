@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block titulo %}Resultados{% endblock %}
+
+{% block cabecera %}Resultados de la búsqueda{% endblock %}
+
+{% block contenido %}
+
+    {% if vinos %}
+        {% for vino in vinos %}
+        <div class="products">
+            <div class="text-products">
+                <p>Nombre: {{vino.nombre}}</p>
+                <p>Bodega: {{vino.bodega}}</p>
+                {% for a in vino.categorias.all %}
+                <p>Categorias: {{a.nombre}}</p>
+                {% endfor %}
+                <img class="img-products" src="{{vino.portada.url}}" alt="">
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-us">Su búsqueda no arroja resultados</p>
+        </div>
+    
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
